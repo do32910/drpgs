@@ -1,0 +1,60 @@
+:root {
+  --apricot: #ffcdbc;
+  --mangoTango: #f5853f;
+  --burntUmber: #7c3626;
+  --zinnwalditeBrown: #2d080a;
+  --smokyBlack: #130303; }
+
+.players-number-btn {
+  color: var(--apricot);
+  background-color: var(--zinnwalditeBrown);
+  border: none; }
+
+.players-number-btn:focus,
+.players-number-btn:hover {
+  outline: none;
+  border: none;
+  background-color: var(--burntUmber);
+  color: var(--apricot); }
+
+.generator-form-input {
+  background-color: var(--apricot);
+  color: var(--burntUmber);
+  border: 2px solid #2d080a; }
+
+.generator-form-input::placeholder {
+  color: var(--burntUmber); }
+
+.generator-form-input:focus::placeholder {
+  color: var(--apricot); }
+
+.generator-form-input:focus {
+  background-color: var(--burntUmber);
+  border: 2px solid #2d080a;
+  outline: none;
+  box-shadow: none;
+  color: var(--apricot); }
+
+.players-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap; }
+
+.player-info {
+  font-size: 0.9rem;
+  border-radius: 10px;
+  list-style: none;
+  width: 28%;
+  background-color: var(--zinnwalditeBrown);
+  color: var(--mangoTango);
+  padding: 10px;
+  margin: 10px 10px 0 10px;
+  display: flex; }
+
+.player-info button {
+  border: none;
+  border-radius: 5px;
+  height: 50%;
+  position: relative;
+  top: 20%;
+  background-color: var(--apricot); }
