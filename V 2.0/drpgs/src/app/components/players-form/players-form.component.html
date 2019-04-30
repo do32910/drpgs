@@ -1,0 +1,23 @@
+<form #playersForm="ngForm" (ngSubmit)="onSubmit(playersForm)">
+  <!-- <fieldset *ngFor="let player of [...Array(players)]"> -->
+  <fieldset *ngFor="let player of [].constructor(players)">
+  <label for="players">
+    Number of players
+    <input type="number" name="player{{players}}" value="1" ngModel>
+  </label>
+  
+  <label for="level">
+    Level
+    <input type="number" name="level{{players}}" value="1" ngModel>
+  </label>
+</fieldset>
+<button type="button" (click)="addPlayerField()" [disabled]="players >= 10">Add another player</button>
+  <fieldset>
+    <legend>Difficulty</legend>
+      <label for="difficulty">Easy<input type="radio" value="easy" name="difficulty" ngModel></label>
+      <label for="difficulty">Medium<input type="radio"  value="medium" name="difficulty" ngModel></label>
+      <label for="difficulty">Hard<input type="radio"  value="hard" name="difficulty" ngModel></label>
+      <label for="difficulty">Deadly<input type="radio"  value="deadly" name="difficulty" ngModel></label>
+  </fieldset>
+  <button type="submit">Generate encounter!</button>
+</form>
