@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { XPTreshold } from '../../models/XPTreshold'
+import { XPTreshold } from '../../data/XPTreshold'
 
 @Component({
   selector: 'app-players-form',
@@ -9,7 +9,9 @@ import { XPTreshold } from '../../models/XPTreshold'
 })
 export class PlayersFormComponent implements OnInit {
 
-  players: number = 1;
+  players:number = 1;
+  XP:number = undefined
+  @Output() ajoj = new EventEmitter<number>();
 
   constructor() { }
 
@@ -29,6 +31,7 @@ export class PlayersFormComponent implements OnInit {
         XP += form[`player${i}`] * XPTreshold["level" + form[`level${i}`]][form.difficulty]
       }
     }
+    this.ajoj.emit(XP)
   }
 
   onSubmit(f: NgForm) {

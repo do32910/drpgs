@@ -1,7 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    {{ title }}
+    {{ title }} {{playersXp}}
   </h1>
-  <app-players-form></app-players-form>
+  <app-players-form (ajoj)="onXPSubmit($event)"></app-players-form>
+  <app-monsters [playersXp]="playersXp" [showMonsterList]="playersXp"></app-monsters>
 </div>

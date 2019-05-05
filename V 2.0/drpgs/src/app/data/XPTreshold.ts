@@ -1,4 +1,4 @@
-export var XPTreshold = {
+export const XPTreshold = {
     level1: {
         easy: 25,
         medium: 50,

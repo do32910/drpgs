@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'drpgs';
+  playersXp = undefined
+  onXPSubmit(xp){
+    this.playersXp = xp
+  }
 }

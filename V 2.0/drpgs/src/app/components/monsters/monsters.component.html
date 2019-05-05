@@ -1,0 +1,27 @@
+<div *ngIf="loaded && showMonsterList">
+
+<h2>Players XP: {{ playersXp }} || Selected monsters XP: </h2>
+<ul *ngFor="let monster of monsters">
+  <li class="monster">
+    <h2>{{ monster.name }}</h2>
+    <h3>{{ monster.challenge_rating }}</h3>
+    <span>
+      Size: {{ monster.size }}
+      Type: {{ monster.type }}
+      AC: {{ monster.armor_class }}
+      HP: {{ monster.hit_points }}
+      Hit dice: {{ monster.hit_dice }}
+      Speed: {{ monster.size }}
+      Size: {{ monster.size }}
+    </span>
+    <span>
+      Strength: {{ monster.strength }}
+      Dexterity: {{ monster.dexterity }}
+      Constitution: {{ monster.constitution }}
+      Intelligence: {{ monster.intelligence }}
+      Wisdom: {{ monster.wisdom }}
+      Charisma: {{ monster.charisma }}
+    </span>
+  </li>
+</ul>
+</div>
