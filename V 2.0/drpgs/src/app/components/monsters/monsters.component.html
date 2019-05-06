@@ -1,9 +1,13 @@
 <div *ngIf="loaded && showMonsterList">
 
-<h2>Players XP: {{ playersXp }} || Selected monsters XP: </h2>
+<h2>Players XP: {{ _playersXp }} || Selected monsters XP: {{ monstersXp }}  || <button (click)="saveParty()">Save party</button></h2>
 <ul *ngFor="let monster of monsters">
   <li class="monster">
     <h2>{{ monster.name }}</h2>
+    <button (click)="calculateMonstersXp(monster, 'subtract')" [disabled]="monster.amountInParty === 0">-</button>
+    <button (click)="calculateMonstersXp(monster, 'add')" [disabled]="monstersXp > (_playersXp * 4)">+</button>
+    <input type="number" value="{{monster.amountInParty}}">
+    <button (click)="calculateMonstersXp(monster, 'removeAll')">Remove</button>
     <h3>{{ monster.challenge_rating }}</h3>
     <span>
       Size: {{ monster.size }}
@@ -14,7 +18,8 @@
       Speed: {{ monster.size }}
       Size: {{ monster.size }}
     </span>
-    <span>
+    <button (click)="monster.expanded = !monster.expanded">Expand</button>
+    <span [hidden]="!monster.expanded">
       Strength: {{ monster.strength }}
       Dexterity: {{ monster.dexterity }}
       Constitution: {{ monster.constitution }}

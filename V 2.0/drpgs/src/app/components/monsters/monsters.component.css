@@ -2,3 +2,8 @@
     border: 1px solid salmon;
     list-style: none;
 }
+
+.hidden{
+    font-size: 30px;
+    color: salmon;
+}
