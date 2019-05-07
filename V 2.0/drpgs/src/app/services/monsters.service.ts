@@ -17,7 +17,6 @@ export class MonstersService {
   ) { }
 
   getMonsters():Observable<any>{
-    
     let resp1 = this.http.get(`${this.apiUrl}/?page=1`)
       .pipe(
         map(data => (data as any).results)
@@ -27,5 +26,12 @@ export class MonstersService {
         map(data => (data as any).results)
       )
       return forkJoin([resp1, resp2])
+  }
+
+  getSingleMonster(monsterName):Observable<any>{
+    return this.http.get(`${this.apiUrl}/?name=${monsterName}`)
+      .pipe(
+        map(data => (data as any).results)
+      )
   }
 }
