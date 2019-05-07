@@ -13,6 +13,7 @@ export class MonsterPartyComponent implements OnInit {
 
   playersXp:number = undefined
   monstersXp:number = undefined
+  monsterParty:string[][] = []
   monsters:Monster[] = []
   loaded:boolean = false
   challengeRating = challengeRating
@@ -22,20 +23,22 @@ export class MonsterPartyComponent implements OnInit {
     this.monstersXp= +this.route.snapshot.paramMap.get('mxp')
     this.playersXp= +this.route.snapshot.paramMap.get('pxp')
     const paramMmonsters = this.route.snapshot.paramMap.get('monsters')
-    var monsterNames = paramMmonsters.split("&")
-    let counter = monsterNames.length
-    monsterNames.forEach(monster => {
-      this.monstersService.getSingleMonster(monster)
+    var monsterData = paramMmonsters.split("&")
+    this.monsterParty = monsterData.map(monster => {
+      return monster.split("*")
+    })
+    console.log(this.monsterParty)
+    let counter = this.monsterParty.length
+    this.monsterParty.forEach(monster => {
+      this.monstersService.getSingleMonster(monster[0])
         .subscribe(response => {
+          console.log(response)
           this.monsters.push(response[0]); 
           counter--
           if(counter === 0){
             this.loaded = true
           }
         })
-    }, function(){
-      counter--
-      
     })
   }
 

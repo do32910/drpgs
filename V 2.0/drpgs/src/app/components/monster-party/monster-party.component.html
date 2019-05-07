@@ -1,6 +1,13 @@
 <h2 *ngIf="playersXp">Players XP: {{ playersXp }} || Monsters XP: {{ monstersXp }}</h2>
 
-<span>Your monster party:</span>
+<h2>Your monster party:</h2>
+<!-- <div *ngIf="monsterParty"> -->
+    <span *ngFor="let monster of monsterParty">
+      {{monster[0]}}x{{monster[1]}} 
+    </span>
+
+<!-- </div> -->
+
 
 <ul *ngIf="loaded">
   <li *ngFor="let monster of monsters">
