@@ -1,3 +1,61 @@
-<p>
-  monster-party works!
-</p>
+<h2 *ngIf="playersXp">Players XP: {{ playersXp }} || Monsters XP: {{ monstersXp }}</h2>
+
+<span>Your monster party:</span>
+
+<ul *ngIf="loaded">
+  <li *ngFor="let monster of monsters">
+    <h2>{{ monster.name }}</h2>
+    <span>{{ monster.size }} {{ monster.type }}, {{ monster.alignment }}</span>
+    <hr>
+    <ul>
+      <li> Armor Class: {{ monster.armor_class }}</li>
+      <li> Hit Points: {{ monster.hit_points }}</li>
+      <li> Speed: {{ monster.speed.walk }}, fly {{ monster.speed.fly }}, swim {{ monster.speed.swim }}</li>
+    </ul>
+    <hr>
+    <ul>
+      <li>STR {{ monster.strength }}</li>
+      <li>DEX {{ monster.dexterity }}</li>
+      <li>CON {{ monster.constitution }}</li>
+      <li>INT {{ monster.intelligence }}</li>
+      <li>WIS {{ monster.wisdom }}</li>
+      <li>CHA {{ monster.charisma }}</li>
+    </ul>
+    <hr>
+    <ul>
+      <li>Saving throws Str +{{ monster.strength_save }}, Dex +{{ monster.dexterity_save }}, Con +{{ monster.constitution_save }}, Int +{{ monster.intelligence_save }}, Wis +{{ monster.wisdom_save }}, Cha +{{ monster.charisma_save }}</li>
+      <!-- <li>Skills Insight +{{}}, Perception +{{}}, Persuasion +{{}}, Stealth +{{}}</li> -->
+      <li>Damage immunities {{ monster.damage_immunities }}</li>
+      <li>Senses {{ monster.senses }}</li>
+      <li>Languages {{ monster.languages }}</li>
+      <li>Challenge {{ monster.challenge_rating }} ({{challengeRating[monster.challenge_rating]}} XP)</li>
+    </ul>
+    <hr>
+    Special Abilities:
+    <ul>
+      <li *ngFor="let ability of monster.special_abilities">
+        {{ ability.name }} : {{ ability.desc }}
+      </li>
+    </ul>
+    <hr>
+    Abilities:
+    <ul>
+      <li *ngFor="let action of monster.actions">
+        <span>{{ action.name }} </span>
+        <span>Attack bonus: {{ action.attack_bonus }} / Damage dice: {{ action.damage_dice }} / Damage bonus: {{ action.damage_bonus }}</span>
+        <p>{{ action.desc }}</p>
+      </li>
+    </ul>
+    <hr>
+    Legendary Abilities:
+    <ul>
+      <li *ngFor="let action of monster.actions">
+        <span>{{ action.name }} </span>
+        <p>{{ action.desc }}</p>
+      </li>
+    </ul>
+    <hr>
+    
+
+  </li>
+</ul>

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { challengeRating } from '../../data/challengeRating';
 import { MonstersService } from '../../services/monsters.service';
 import { Monster } from '../../models/Monster';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-monsters',
@@ -11,7 +12,7 @@ import { Monster } from '../../models/Monster';
 
 export class MonstersComponent implements OnInit {
 
-  constructor(private monstersService:MonstersService) { }
+  constructor(private monstersService:MonstersService, private router:Router) { }
 
   monsters:Monster[] = []
   loaded:boolean = false
@@ -60,7 +61,8 @@ export class MonstersComponent implements OnInit {
   }
 
   saveParty(){
-    this.monsters.filter(monster => monster.amountInParty > 0)
+    const names = this.monsters.filter(monster => monster.amountInParty > 0).map(monster => monster.name).join("&")
+    this.router.navigate([`/party/${this._playersXp}/${this.monstersXp}/${names}`])    
   }
 
 }

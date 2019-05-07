@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayersFormComponent } from './.../components/players-form/players-form.component';
+import { PlayersFormComponent } from '../../components/players-form/players-form.component';
 import { MonstersComponent } from '../../components/monsters/monsters.component';
 
 @Component({
