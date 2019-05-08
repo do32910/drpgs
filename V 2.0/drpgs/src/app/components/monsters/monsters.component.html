@@ -1,32 +1,113 @@
-<div *ngIf="loaded && showMonsterList">
-
-<h2>Players XP: {{ _playersXp }} || Selected monsters XP: {{ monstersXp }}  || <button (click)="saveParty()">Save party</button></h2>
-<ul *ngFor="let monster of monsters">
-  <li class="monster">
-    <h2>{{ monster.name }}</h2>
-    <button (click)="calculateMonstersXp(monster, 'subtract')" [disabled]="monster.amountInParty === 0">-</button>
-    <button (click)="calculateMonstersXp(monster, 'add')" [disabled]="monstersXp > (_playersXp * 4)">+</button>
-    <input type="number" value="{{monster.amountInParty}}">
-    <button (click)="calculateMonstersXp(monster, 'removeAll')">Remove</button>
-    <h3>{{ monster.challenge_rating }}</h3>
-    <span>
-      Size: {{ monster.size }}
-      Type: {{ monster.type }}
-      AC: {{ monster.armor_class }}
-      HP: {{ monster.hit_points }}
-      Hit dice: {{ monster.hit_dice }}
-      Speed: {{ monster.size }}
-      Size: {{ monster.size }}
-    </span>
-    <button (click)="monster.expanded = !monster.expanded">Expand</button>
-    <span [hidden]="!monster.expanded">
-      Strength: {{ monster.strength }}
-      Dexterity: {{ monster.dexterity }}
-      Constitution: {{ monster.constitution }}
-      Intelligence: {{ monster.intelligence }}
-      Wisdom: {{ monster.wisdom }}
-      Charisma: {{ monster.charisma }}
-    </span>
-  </li>
-</ul>
-</div>
+<!-- <div *ngIf="loaded && showMonsterList"> -->
+  
+  <div class="game-data">
+    Players XP: {{ _playersXp }} 
+    <i class="d and d icon"></i>
+    Selected monsters XP: {{ monstersXp }}  
+    <button (click)="saveParty()" class="ui inverted brown button">Save party</button></div>
+    <ul *ngFor="let monster of monsters">
+      <li class="monster">
+        <h2 class="monster__title">{{ monster.name }}</h2>
+        <h3 class="monster__subtitle">{{ monster.size }} {{ monster.type }}, {{ monster.alignment }}</h3>
+        <!-- <button (click)="calculateMonstersXp(monster, 'subtract')" [disabled]="monster.amountInParty === 0">-</button>
+          <button (click)="calculateMonstersXp(monster, 'add')" [disabled]="monstersXp > (_playersXp * 4)">+</button>
+          <input type="number" value="{{monster.amountInParty}}">
+          <button (click)="calculateMonstersXp(monster, 'removeAll')">Remove</button> -->
+          <h4 class="monster__challenge_rating">XP: {{ monster.challenge_rating }}</h4>
+          <div class="ui buttons">
+            <button (click)="calculateMonstersXp(monster, 'add')" [disabled]="monstersXp > (_playersXp * 4)" class="ui icon button brown"><i class="plus icon"></i></button>
+            <button (click)="calculateMonstersXp(monster, 'subtract')" [disabled]="monster.amountInParty === 0" class="ui icon button brown"><i class="minus icon"></i></button>
+            <i></i>
+          </div>
+          <div class="ui action input">
+            <!-- <i></i> -->
+            <input type="number" min="0" value="{{monster.amountInParty}}" class="ui input brown monster__amount-in-party">
+            <button (click)="calculateMonstersXp(monster, 'removeAll')" class="ui button brown icon"><i class="icon trash"></i></button>
+          </div>
+          
+          <ul class="monster__short-info">
+            <li><span class="label">AC:</span> {{ monster.armor_class }}</li>
+            <li><span class="label">HP:</span> {{ monster.hit_points }}</li>
+            <li><span class="label">Hit dice:</span> {{ monster.hit_dice }}</li>
+            <li><span class="label">Speed:</span> {{ monster.speed.walk }} ft., fly {{ monster.speed.fly }}ft., swim {{ monster.speed.swim }} ft.</li>
+            <li><span class="label">Size:</span> {{ monster.size }}</li>
+          </ul>
+          
+          <button (click)="monster.expanded = !monster.expanded" class="ui inverted brown icon button monster__exapand-btn"><i class="icon angle double" [ngClass]="monster.expanded ? 'up' : 'down'"></i></button>
+          
+          
+          <div [hidden]="!monster.expanded">
+            <ul class="monster__abilities">
+              <li class="monster__abilities-item"><span class="monster__abilities-item-desc">STR</span> <span class="monster__abilities-item-val">{{ monster.strength }}</span></li>
+              <li class="monster__abilities-item"><span class="monster__abilities-item-desc">DEX</span> <span class="monster__abilities-item-val">{{ monster.dexterity }}</span></li>
+              <li class="monster__abilities-item"><span class="monster__abilities-item-desc">CON</span> <span class="monster__abilities-item-val">{{ monster.constitution }}</span></li>
+              <li class="monster__abilities-item"><span class="monster__abilities-item-desc">INT</span> <span class="monster__abilities-item-val">{{ monster.intelligence }}</span></li>
+              <li class="monster__abilities-item"><span class="monster__abilities-item-desc">WIS</span> <span class="monster__abilities-item-val">{{ monster.wisdom }}</span></li>
+              <li class="monster__abilities-item"><span class="monster__abilities-item-desc">CHA</span> <span class="monster__abilities-item-val">{{ monster.charisma }}</span></li>
+            </ul>
+            <ul class="monster__extra-stats">
+              <li class="monster__basic-stats-item">
+                <span class="label">Saving throws: </span>
+                <span *ngIf="monster.strength_save">Str +{{ monster.strength_save }},</span>
+                <span *ngIf="monster.dexterity_save">Dex +{{ monster.dexterity_save }}, </span>
+                <span *ngIf="monster.constitution_save">Con +{{ monster.constitution_save }}, </span>
+                <span *ngIf="monster.intelligence_save">Int +{{ monster.intelligence_save }}, </span>
+                <span *ngIf="monster.wisdom_save">Wis +{{ monster.wisdom_save }}, </span>
+                <span *ngIf="monster.charisma_save">Cha +{{ monster.charisma_save }}</span>
+              </li>
+              <!-- <li>Skills Insight +{{}}, Perception +{{}}, Persuasion +{{}}, Stealth +{{}}</li> -->
+              <li class="monster__basic-stats-item">
+                <span class="label">Damage immunities: </span>
+                {{ monster.damage_immunities }}</li>
+                <li class="monster__basic-stats-item">
+                  <span class="label">Senses: </span>
+                  {{ monster.senses }}</li>
+                  <li class="monster__basic-stats-item">
+                    <span class="label">Languages: </span>
+                    {{ monster.languages }}</li>
+                    <li class="monster__basic-stats-item">
+                      <span class="label">Challenge: </span>
+                      {{ monster.challenge_rating }} ({{challengeRating[monster.challenge_rating]}} XP)</li>
+                    </ul>
+                    <h4 class="section-title" *ngIf="monster.special_abilities">Special Abilities:</h4>
+                    <ul>
+                      <li *ngFor="let ability of monster.special_abilities" class="monster__ability">
+                        <span class="label">{{ ability.name }}: </span> {{ ability.desc }}
+                      </li>
+                    </ul>
+                    <h4 class="section-title">Actions:</h4>
+                    <ul class="monster__actions">
+                      <li *ngFor="let action of monster.actions">
+                        <span class="label">{{ action.name }}: </span>
+                        <span>Attack bonus: {{ action.attack_bonus }} / Damage dice: {{ action.damage_dice }} / Damage bonus: {{ action.damage_bonus }}</span>
+                        <p>{{ action.desc }}</p>
+                      </li>
+                    </ul>
+                    <h4 class="section-title">Legendary Actions:</h4>
+                    <ul *ngIf="monster.legendary_actions" class="monster__legendary-actions">
+                      <li *ngFor="let action of monster.legendary_actions">
+                        <span class="label">{{ action.name }}: </span>
+                        <p>{{ action.desc }}</p>
+                      </li>
+                    </ul> 
+                    <span *ngIf="!monster.legendary_actions">None</span>    
+              </div>
+              
+              
+              
+              
+              
+              
+              
+              
+              <!-- <span [hidden]="!monster.expanded">
+                Strength: {{ monster.strength }}
+                Dexterity: {{ monster.dexterity }}
+                Constitution: {{ monster.constitution }}
+                Intelligence: {{ monster.intelligence }}
+                Wisdom: {{ monster.wisdom }}
+                Charisma: {{ monster.charisma }}
+              </span> -->
+            </li>
+          </ul>
+          <!-- </div> -->

@@ -1,68 +1,91 @@
-<h2 *ngIf="playersXp">Players XP: {{ playersXp }} || Monsters XP: {{ monstersXp }}</h2>
-
-<h2>Your monster party:</h2>
-<!-- <div *ngIf="monsterParty"> -->
-    <span *ngFor="let monster of monsterParty">
-      {{monster[0]}}x{{monster[1]}} 
-    </span>
-
-<!-- </div> -->
-
-
-<ul *ngIf="loaded">
-  <li *ngFor="let monster of monsters">
-    <h2>{{ monster.name }}</h2>
-    <span>{{ monster.size }} {{ monster.type }}, {{ monster.alignment }}</span>
-    <hr>
-    <ul>
-      <li> Armor Class: {{ monster.armor_class }}</li>
-      <li> Hit Points: {{ monster.hit_points }}</li>
-      <li> Speed: {{ monster.speed.walk }}, fly {{ monster.speed.fly }}, swim {{ monster.speed.swim }}</li>
-    </ul>
-    <hr>
-    <ul>
-      <li>STR {{ monster.strength }}</li>
-      <li>DEX {{ monster.dexterity }}</li>
-      <li>CON {{ monster.constitution }}</li>
-      <li>INT {{ monster.intelligence }}</li>
-      <li>WIS {{ monster.wisdom }}</li>
-      <li>CHA {{ monster.charisma }}</li>
-    </ul>
-    <hr>
-    <ul>
-      <li>Saving throws Str +{{ monster.strength_save }}, Dex +{{ monster.dexterity_save }}, Con +{{ monster.constitution_save }}, Int +{{ monster.intelligence_save }}, Wis +{{ monster.wisdom_save }}, Cha +{{ monster.charisma_save }}</li>
-      <!-- <li>Skills Insight +{{}}, Perception +{{}}, Persuasion +{{}}, Stealth +{{}}</li> -->
-      <li>Damage immunities {{ monster.damage_immunities }}</li>
-      <li>Senses {{ monster.senses }}</li>
-      <li>Languages {{ monster.languages }}</li>
-      <li>Challenge {{ monster.challenge_rating }} ({{challengeRating[monster.challenge_rating]}} XP)</li>
-    </ul>
-    <hr>
-    Special Abilities:
-    <ul>
-      <li *ngFor="let ability of monster.special_abilities">
-        {{ ability.name }} : {{ ability.desc }}
-      </li>
-    </ul>
-    <hr>
-    Abilities:
-    <ul>
-      <li *ngFor="let action of monster.actions">
-        <span>{{ action.name }} </span>
-        <span>Attack bonus: {{ action.attack_bonus }} / Damage dice: {{ action.damage_dice }} / Damage bonus: {{ action.damage_bonus }}</span>
-        <p>{{ action.desc }}</p>
-      </li>
-    </ul>
-    <hr>
-    Legendary Abilities:
-    <ul>
-      <li *ngFor="let action of monster.actions">
-        <span>{{ action.name }} </span>
-        <p>{{ action.desc }}</p>
-      </li>
-    </ul>
-    <hr>
-    
-
-  </li>
-</ul>
+<h2 *ngIf="playersXp" class="game-data">
+  Players XP: {{ playersXp }} 
+  <i class="icon d and d"></i>
+  Monsters XP: {{ monstersXp }}</h2>
+  
+  <div class="monster-party__container">
+    <h3>Your monster party:</h3>
+    <ul class="monster-party__list">
+      <li class="monster-party__list-item" *ngFor="let monster of monsterParty">
+        <span class="monster-party__name">{{monster[0]}}</span> <span class="monster-party__number"> x{{monster[1]}}</span> 
+      </li>      
+    </ul>    
+  </div>
+  
+  <ul *ngIf="loaded" class="monster-list">
+    <li *ngFor="let monster of monsters" class="monster">
+      <h2 class="monster__name">{{ monster.name }}</h2>
+      <h3 class="monster__subtitle">{{ monster.size }} {{ monster.type }}, {{ monster.alignment }}</h3>
+      <!-- <hr> -->
+      <ul class="monster__basic-stats">
+        <li class="monster__basic-stats-item">
+          <span class="label">Armor Class: </span>
+          {{ monster.armor_class }}
+        </li>
+        <li class="monster__basic-stats-item">
+          <span class="label">Hit Points:</span>
+          {{ monster.hit_points }}
+        </li>
+        <li class="monster__basic-stats-item">
+          <span class="label">Speed:</span>
+          {{ monster.speed.walk }} ft.
+          <span *ngIf="monster.speed.fly">, fly {{ monster.speed.fly }} ft.</span>
+          <span *ngIf="monster.speed.swim">, swim {{ monster.speed.swim }} ft.</span>
+        </li>
+      </ul>
+      <ul class="monster__abilities">
+        <li class="monster__abilities-item"><span class="monster__abilities-item-desc">STR</span> <span class="monster__abilities-item-val">{{ monster.strength }}</span></li>
+        <li class="monster__abilities-item"><span class="monster__abilities-item-desc">DEX</span> <span class="monster__abilities-item-val">{{ monster.dexterity }}</span></li>
+        <li class="monster__abilities-item"><span class="monster__abilities-item-desc">CON</span> <span class="monster__abilities-item-val">{{ monster.constitution }}</span></li>
+        <li class="monster__abilities-item"><span class="monster__abilities-item-desc">INT</span> <span class="monster__abilities-item-val">{{ monster.intelligence }}</span></li>
+        <li class="monster__abilities-item"><span class="monster__abilities-item-desc">WIS</span> <span class="monster__abilities-item-val">{{ monster.wisdom }}</span></li>
+        <li class="monster__abilities-item"><span class="monster__abilities-item-desc">CHA</span> <span class="monster__abilities-item-val">{{ monster.charisma }}</span></li>
+      </ul>
+      <ul class="monster__extra-stats">
+        <li class="monster__basic-stats-item">
+          <span class="label">Saving throws: </span>
+          <span *ngIf="monster.strength_save">Str +{{ monster.strength_save }},</span>
+          <span *ngIf="monster.dexterity_save">Dex +{{ monster.dexterity_save }}, </span>
+          <span *ngIf="monster.constitution_save">Con +{{ monster.constitution_save }}, </span>
+          <span *ngIf="monster.intelligence_save">Int +{{ monster.intelligence_save }}, </span>
+          <span *ngIf="monster.wisdom_save">Wis +{{ monster.wisdom_save }}, </span>
+          <span *ngIf="monster.charisma_save">Cha +{{ monster.charisma_save }}</span>
+        </li>
+        <!-- <li>Skills Insight +{{}}, Perception +{{}}, Persuasion +{{}}, Stealth +{{}}</li> -->
+        <li class="monster__basic-stats-item">
+          <span class="label">Damage immunities: </span>
+          {{ monster.damage_immunities }}</li>
+          <li class="monster__basic-stats-item">
+            <span class="label">Senses: </span>
+            {{ monster.senses }}</li>
+            <li class="monster__basic-stats-item">
+              <span class="label">Languages: </span>
+              {{ monster.languages }}</li>
+              <li class="monster__basic-stats-item">
+                <span class="label">Challenge: </span>
+                {{ monster.challenge_rating }} ({{challengeRating[monster.challenge_rating]}} XP)</li>
+              </ul>
+              <h4 class="section-title" *ngIf="monster.special_abilities">Special Abilities:</h4>
+              <ul>
+                <li *ngFor="let ability of monster.special_abilities" class="monster__ability">
+                  <span class="label">{{ ability.name }}: </span> {{ ability.desc }}
+                </li>
+              </ul>
+              <h4 class="section-title">Actions:</h4>
+              <ul class="monster__actions">
+                <li *ngFor="let action of monster.actions">
+                  <span class="label">{{ action.name }}: </span>
+                  <span>Attack bonus: {{ action.attack_bonus }} / Damage dice: {{ action.damage_dice }} / Damage bonus: {{ action.damage_bonus }}</span>
+                  <p>{{ action.desc }}</p>
+                </li>
+              </ul>
+              <h4 class="section-title">Legendary Actions:</h4>
+              <ul *ngIf="monster.legendary_actions" class="monster__legendary-actions">
+                <li *ngFor="let action of monster.legendary_actions">
+                  <span class="label">{{ action.name }}: </span>
+                  <p>{{ action.desc }}</p>
+                </li>
+              </ul> 
+              <span *ngIf="!monster.legendary_actions">None</span>    
+            </li>
+          </ul>

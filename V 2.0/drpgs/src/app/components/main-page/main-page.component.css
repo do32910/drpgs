@@ -1,0 +1,10 @@
+.container{
+    text-align: center;
+}
+
+h1{
+    font-family: 'Uncial Antiqua', cursive;
+    text-transform: uppercase;
+    color: rgb(61, 170, 61);
+    font-size: 70px;
+}

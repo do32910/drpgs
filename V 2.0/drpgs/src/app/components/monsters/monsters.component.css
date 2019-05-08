@@ -1,9 +1,54 @@
 .monster{
-    border: 1px solid salmon;
+    border-bottom: 5px solid #a52a2a;
     list-style: none;
 }
-
+.monster__title{
+    color: #58170D;
+    font-size: 28px;
+    margin-bottom: 0px;
+}
+.monster__subtitle{
+    font-size: 15px;
+    font-style: italic;
+    margin: 3px;
+}
+.monster__amount-in-party{
+    border-radius: 0 !important;
+}
+.monster__amount-in-party:focus, .monster__amount-in-party:active{
+    border-color: red;
+}
+.monster__challenge_rating{
+    font-size: 22px;
+    margin: 6px;
+    color: #a52a2a;
+}
 .hidden{
     font-size: 30px;
     color: salmon;
+}
+.monster__short-info{
+    list-style: none;
+    display: flex;
+    padding: 20px;
+    justify-content: space-evenly;
+}
+.monster__exapand-btn{
+    width: 120px;
+    margin: 20px;
+}
+.label{
+    font-weight: bold;
+}
+
+.game-data{
+    position: sticky;
+    top: 0px;
+    background-color: #ffebba;
+    background-image: url(../../../assets/img/exclusive-paper.png);
+    padding: 24px;
+    font-size: 30px;
+    color: #58170D;
+    font-weight: bold;
+    box-shadow: -2px 3px 8px;
 }

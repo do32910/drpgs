@@ -1,23 +1,28 @@
-<form #playersForm="ngForm" (ngSubmit)="onSubmit(playersForm)">
+<form #playersForm="ngForm" (ngSubmit)="onSubmit(playersForm)" class="players-form">
   <!-- <fieldset *ngFor="let player of [...Array(players)]"> -->
-  <fieldset *ngFor="let player of [].constructor(players)">
-  <label for="players">
-    Number of players
-    <input type="number" name="player{{players}}" value="1" ngModel>
-  </label>
+    <fieldset *ngFor="let player of [].constructor(players)">
+      <div class="ui labeled input players-form__input">
+        <label class="ui label">
+          Number of players
+        </label>
+        <input type="number" name="player{{players}}" ngModel min='0' max='10'>
+      </div>
+      <div class="ui labeled input players-form__input">
+        <label class="ui label">
+          Level
+        </label>
+        <input type="number" name="level{{players}}" ngModel min='1' max='10'>
+      </div>
+      <button (click)="players=players-1" class="ui compact icon button players-form__remove-btn"><i class="minus icon"></i></button>
+    </fieldset>
+    <button type="button" class="ui inverted primary button players-form__add-btn" (click)="addPlayerField()" [disabled]="players >= 10">Add another player</button>
+      <fieldset class="inline fields players-form__difficulty" id="difficulty">
+        <legend class="ui header" >Difficulty</legend>
+        <div class="field"><div class="ui radio checkbox"><input type="radio" value="easy" name="difficulty" ngModel><label for="difficulty">Easy</label></div></div>
+        <div class="field"><div class="ui radio checkbox"><input type="radio"  value="medium" name="difficulty" ngModel><label for="difficulty">Medium</label></div></div>
+        <div class="field"><div class="ui radio checkbox"><input type="radio"  value="hard" name="difficulty" ngModel><label for="difficulty">Hard</label></div></div>
+        <div class="field"><div class="ui radio checkbox"><input type="radio"  value="deadly" name="difficulty" ngModel><label for="difficulty">Deadly</label></div></div>
+      </fieldset>
+    <button type="submit" class="ui purple inverted button players-form__generate-btn">Generate encounter!</button>
+  </form>
   
-  <label for="level">
-    Level
-    <input type="number" name="level{{players}}" value="1" ngModel>
-  </label>
-</fieldset>
-<button type="button" (click)="addPlayerField()" [disabled]="players >= 10">Add another player</button>
-  <fieldset>
-    <legend>Difficulty</legend>
-      <label for="difficulty">Easy<input type="radio" value="easy" name="difficulty" ngModel></label>
-      <label for="difficulty">Medium<input type="radio"  value="medium" name="difficulty" ngModel></label>
-      <label for="difficulty">Hard<input type="radio"  value="hard" name="difficulty" ngModel></label>
-      <label for="difficulty">Deadly<input type="radio"  value="deadly" name="difficulty" ngModel></label>
-  </fieldset>
-  <button type="submit">Generate encounter!</button>
-</form>

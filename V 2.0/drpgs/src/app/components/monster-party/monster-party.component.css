@@ -1,0 +1,85 @@
+.monster-list{
+    padding: 0;
+}
+
+.game-data{
+    background-color: #ffebba;
+    background-image: url(../../../assets/img/exclusive-paper.png);
+    padding: 24px;
+    font-size: 30px;
+    color: #58170D;
+    font-weight: bold;
+    box-shadow: -2px 3px 8px;
+}
+.monster{
+    list-style: none;
+    margin-bottom: 30px;
+    padding: 20px 40px;
+    border-bottom: 10px solid brown;
+}
+.monster-party__container{
+    margin: 30px;
+    border-bottom: 3px solid brown;
+}
+.monster-party__name{
+    font-weight: bold;
+    color: #58170D;
+    font-size: 20px;
+}
+.monster-party__list-item{
+    list-style: none;
+}
+.monster-party__list-item::before{
+    content: '# ';
+}
+.monster__name{
+    color: #58170D;
+    font-size: 28px;
+    margin-bottom: 0px;
+}
+.monster__subtitle{
+    font-size: 15px;
+    font-style: italic;
+    margin: 3px;
+    border-bottom: 2px solid brown;
+}
+.monster__basic-stats{
+    margin: 10px 0;
+    border-bottom: 2px solid brown;
+}
+.monster__extra-stats{
+    margin: 10px 0;
+}
+.monster__basic-stats-item{
+    list-style: circle;
+}
+.label{
+    font-weight: bold;
+    color: #58170D;
+}
+.monster__abilities{
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+    border-bottom: 2px solid brown;
+}
+.monster__abilities-item{
+    color: #58170D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+.monster__abilities-item-desc{
+    font-size: 26px;
+    font-weight: bold;
+}
+.monster__abilities-item-val{
+    font-size: 20px;
+    padding-top: 10px;
+}
+.section-title{
+    font-size: 20px;
+    color: #58170D;
+    border-bottom: 1px solid brown;
+}

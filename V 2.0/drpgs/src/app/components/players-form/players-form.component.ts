@@ -11,7 +11,7 @@ export class PlayersFormComponent implements OnInit {
 
   players:number = 1;
   XP:number = undefined
-  @Output() ajoj = new EventEmitter<number>();
+  @Output() playersXP = new EventEmitter<number>();
 
   constructor() { }
 
@@ -31,7 +31,7 @@ export class PlayersFormComponent implements OnInit {
         XP += form[`player${i}`] * XPTreshold["level" + form[`level${i}`]][form.difficulty]
       }
     }
-    this.ajoj.emit(XP)
+    this.playersXP.emit(XP)
   }
 
   onSubmit(f: NgForm) {
